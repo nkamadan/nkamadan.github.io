@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Static 
+title: Static HAHAHAHAHAHA
 description: Static Analysis Tool to Detect Timing Based Side Channel Attacks
 img: /assets/img/sidechannels.jpeg
 importance: 1
