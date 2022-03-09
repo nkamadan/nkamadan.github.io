@@ -2,10 +2,11 @@
 layout: page
 permalink: /teaching/
 title: teaching
-description: Materials for courses you taught. Replace this text with your description.
+description: Operating Systems - CS307
 nav: true
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
-
-Organize your courses by years, topics, or universities, however you like!
+Besides my research experience, I have gained significant teaching experience. As an undergraduate teaching assistant of Operating Systems class, I have held weekly office hours and
+explained Operating Systems concepts in the recitations. This teaching experience made me realize
+that not only do I love to teach, but I also have the desire and skills to explain concepts with theoretical
+intensity in a pedagogical way, starting from the basic building blocks of the topic and supporting them with analogies from everyday life.

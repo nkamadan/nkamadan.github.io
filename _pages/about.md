@@ -2,23 +2,29 @@
 layout: about
 title: about
 permalink: /
-description: <a href="#">Affiliations</a>. Address. Contacts. Moto. Etc.
+description: Senior Computer Science and Engineering Student at <a href="#">Sabanci University</a>.
 
 profile:
   align: right
   image: prof_pic.jpg
   address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Istanbul, Turkey</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+<a href="#">kamadan@kamadan-xps:~$ whoami </a>
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Hello! My name is Nureddin, and I am a senior Computer science and Engineering student at Sabanci University. I am fortunate to be advised by Prof. Erkay Savas and Prof. Cemal Yilmaz. 
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/){:target="\_blank"} and [Academicons](https://jpswalsh.github.io/academicons/){:target="\_blank"}, like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+
+<a href="#">kamadan@kamadan-xps:~$ cat research.txt </a>
+
+My main research interests lie on the intersection of operating systems, computer architecture and security. I am impressed by the interaction between the hardware and the software. I feel intellectually fulfilled while working on system and security topics. In general, I love building secure and reliable systems and I believe research in this direction has a major potential positive impact on the society. More recently, I am working on developing a static analysis tool to detect timing based side channel attacks. 
+
+
+<a href="#">kamadan@kamadan-xps:~$ cat extra.txt </a>
+
+When I am not working on projects, I enjoy playing Dota2 (best offlaner in the universe), reading history, and going on a hike or road trip. I love to read about social, economical and political history and observe the change of human mentality throughout history as a result of changes in socio-economic and/or political situation. I also love physics and astronomy.

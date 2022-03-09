@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-09-22" />
+  <title>My Document</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="custom.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">My Document</h1>
+<p class="date">September 22, 2020</p>
+</header>
+<h1 id="cs-411">CS 411</h1>
+<h2 id="st-slide">1st Slide</h2>
+<ul>
+<li>Attack Methods:</li>
+</ul>
+<ol type="1">
+<li>Ciphertext only: Eve can only access ciphertext</li>
+<li>Known plaintext: Eve has pairs of ciphertext and corresponding plaintext and tries to deduce the key</li>
+<li>Chosen plaintext: Eve can have a ciphertext corresponding to a sample plaintext which she believes is useful in deducing the key</li>
+<li>Chosen ciphertext: Eve can have a plaintext corresponding to a sample ciphertext</li>
+</ol>
+<ul>
+<li>Kerckhkoffs’ Principle: 1) Complete knowledge of the algorithm is public. This means that when we evaluate the strength of an algorithm, we assume that the attacker knows the algorithm used. 2) The security of the system is based on, the strength of the algorithm and the key space ##### Symmetric key algorithms</li>
+<li>Encryption and decryption keys are known to both parties, sender and receiver.</li>
+<li>Enc. and dec. keys are related if not identical.</li>
+<li>A secret must be known by both parties in order to generate the keys.</li>
+<li>DES, AES ##### Public Key Cryptosystems - PKC</li>
+<li>Single key is a problem for security and the distribution of the single key is difficult.</li>
+<li>Electronic signatures, key exchange, cryptocurrencies and many more applications. ##### Main Objectives of Cryptography</li>
+<li>Confidentiality: Hiding contents of messages exchanged.</li>
+<li>Authentication: The owner of a message is correctly identified.</li>
+<li>Integrity: Only authorized parties are able to modify daya and transmitted info.</li>
+<li>Non-repudiation: No party can deny that he sent the message.</li>
+</ul>
+<h2 id="nd-slide">2nd Slide</h2>
+<ul>
+<li>Ring Zm = {0,1,…,m-1}. + ve x islemlerini bu ringte iki elemena uygulayip modulo alinca yine bu ringden bir eleman cikacak. m=9 olsun, Z9 = {0,1,…,8}. 6+8 mod 9 = 5. 6x8 mod 9 = 3.</li>
+<li>Additive identity. Etkisiz eleman. a+0 = a</li>
+<li>Additive inverse of a: a + inverse_of_a = 0 mod m</li>
+<li>Multiplicative identity: ax1=a mod m</li>
+<li>Multiplicative inverse of a exists if gcd(a,m)=1. a^-1 x a = 1 mod m</li>
+<li>Example: 3^8 mod 7 =? 3^2 mod 7 * 3^2 mod 7 * … ##### Shift cipher</li>
+<li>Key = k. Encryption= x+k mod 26. Decryption: y-k mod 26.</li>
+<li>Try all possible keys, exhaustive search. Key space is only 26. OR, letter frequency analysis -&gt; Same plaintext letters map to the same ciphertext letters. ##### Affine cipher</li>
+<li>Key k=(a,b) both a,b in Z26.</li>
+<li>Encryption: ax+b mod 26.</li>
+<li>Decryption: (y-b)* a^-1 mod 26.</li>
+<li>No one to one map between plaintext and ciphertext. Different plaintext may map to the same ciphertext. SOLUTION: b can be any number in Z26, however a must meet a condition gcd(a,26) = 1. WHY? We need exactly 1 solution in the decryption. More than 1 solution leads to the problem of having same ciphertext for different plaintexts.</li>
+<li>Key space is b can take 26 values, a can take 12 values –&gt; 26x12=312.</li>
+<li>Ciphertext only: exhaustive search or frequency analysis.</li>
+<li>Known plaintext: Any two letters in plaintext and ciphertext. Iki bilinmeyenli denklem ve iki denklem = cozum. ##### Vigenere Cipher</li>
+<li>Choose a key length and the key. Security depends on keyword and the length.</li>
+<li>Encrypt each letter by the corresponding index of the key. When length is exhausted, return to the beginning and keep encrypting.</li>
+<li>Chosen-plaintext attack: pick “AAAAA..” as the plaintext</li>
+<li>Ciphertext-only attack: Frequency analysis is possible if you know the key length.</li>
+<li>Finding the key length: Frequency analysis. Elinde var olan ciphertextin altina bir baska cipher texti surekli 1 kaydirarak koy ve ayni olan harf sayilarina bak. Key length kadar shift etmissen, coincidince fazla olacaktir.</li>
+<li>Key length’i bulduktan sonra ciphertext’ten ayni shift amountta shift edilmis letterlari sub cipher text olarak ayirip her bir sub cipher text icin bir daha frequency analysis yapiyoruz. Sub ciphertext’te en cok tekrar eden karakter, ikinci en cok tekrar eden karakter acaba sunlar olabilir mi diye deneyip bakiyoruz. ##### Key space</li>
+<li>Key space of Caesar cipher: 26</li>
+<li>Key space of Affine cipher: 12.26: 312</li>
+<li>However, we can say that for any substitution cipher, the key space is at most 26!. WHY? We can just try all possibilities that a letter could map. Start with letter A, 26 options. Continue with letter B, 25 options. So on.. ##### Diffusion property</li>
+<li>Changing one letter in the plaintext result in changes in letters of the ciphertext</li>
+<li>Hill cipher, key is a matrix and the plaintext is also in form of matrix. The encryption is matrix multiplication. So, if you change 1 letter in the plaintext, all the ciphertext letters will be changed. <img src="/home/kamadan/Desktop/4-1/CS411/notes/hill.png" alt="Diffusion property of Hill cipher" /> ##### Confusion property</li>
+<li>The map between the ciphertext and the plaintext must be complex. Each char of the ciphertext should depend as many key chars as possible. ##### One time pad</li>
+<li>Provably secure. Xor the plaintext with the key consisting of truly random 0s and 1s. Key length is same as plaintext length.</li>
+<li>Binary random key sequence: 1) Unbiased. 1s and 0s are expected to be equal. 2) Unpredictability. Independent of the number of bits of a sequence observer, the probability of quessing the next bit should not be better than 1/2. <img src="/home/kamadan/Desktop/4-1/CS411/notes/random.png" alt="Randomness of the ciphertext" /> ##### De-Skewing</li>
+<li>There are ways to manipulate biased output bits to make them look like truly random. Assume k=1 with probability p and k=0, 1-p. When the generated output sequence has 00,11, discard them. When 01 or 10 is generated take them since 01–&gt; px(1-p) = (1-p)xp –&gt;10. Take 01 as 0 and 10 as 1 in the final output.</li>
+</ul>
+<h2 id="rd-slide">3rd Slide</h2>
+<ul>
+<li>Prime number theorem: pi_x = number of primes less than x –&gt; pi_x = x/lnx as x goes to infinity.</li>
+<li>GCD(a,b) is calculated whether by factoring both a and b into primes or by using Euclidean algorithm. <img src="/home/kamadan/Desktop/4-1/CS411/notes/euclidean.png" alt="Euclidean Algorithm" /></li>
+<li>Congruence classes: a and b congruent if a=b mod(n). a-b is negative or positive, multiple of n. 3=10 mod(7).</li>
+<li>Solutions to ax=b mod n. If gcd(a,n)=1, exactly 1 solution. If gcd(a,n)=d!=1. If d | b then there are d solutions. If not, there are no solutions. <img src="/home/kamadan/Desktop/4-1/CS411/notes/example1.png" alt="Example1" /></li>
+<li>Since, 3 divides 15. There are 3 solutions. ##### CRT (Chinese Remainder Theorem)</li>
+<li>Each modulos must be relatively prime pairwise <img src="/home/kamadan/Desktop/4-1/CS411/notes/crt.png" alt="CRT" /></li>
+<li>For small numbers this can be maintainable but for large numbers we can’t do this. <img src="/home/kamadan/Desktop/4-1/CS411/notes/gauss.png" alt="Gauss Algorithm" /></li>
+<li>For ni = 3,5,7, n = 3.5.7 =105.</li>
+<li>CRT is very important in RSA. ##### How to deal with huge exponents?</li>
+<li>Consider 2^1234 mod 789. 1) Calculate the huge number and reduce modulo 789. Not practically possible, 2) Use binary left to right like algorithm for the exponent. ##### Fermat’s little theorem <img src="/home/kamadan/Desktop/4-1/CS411/notes/fermat.png" alt="Fermat" /> ##### Euler’s theorem <img src="/home/kamadan/Desktop/4-1/CS411/notes/euler.png" alt="Euler" />
+<ul>
+<li>phi_n = n.(1 - n’in prime factorleri)</li>
+<li>Yani n=15 ise phi_n = 15.2/3.4/5 = 8. <img src="/home/kamadan/Desktop/4-1/CS411/notes/math.png" alt="Example Questions" /></li>
+</ul></li>
+</ul>
+<ol type="1">
+<li>phi_11 = 10 and gcd(2,11)=1. So, 2^10 = 1 mod(11).</li>
+<li>Either we will do exhaustive search or use what we know</li>
+<li>phi_10 = 10.(1-1/2).(1-1/5) = 4.</li>
+<li>gcd(2,101)=1 and phi_101 = 100. So, we can write this exponentiation like this: 2^43200 = 1 mod (101) . 2^10 mod(101). The answer is simply 2^10 mod(101) <img src="/home/kamadan/Desktop/4-1/CS411/notes/feature.png" alt="Feature" /> ##### Group</li>
+</ol>
+<ul>
+<li>A GROUP HAS TO OBEY INVERTIBILITY. SO, PRIME NUMBERLAR’IN GRUPLARI 1’DEN P-1’E KADAR OLSA DA COMPOSITE NUMBERLARDA BU OLAMAZ. CUNKU COMPOSITE NUMBER’LA O GRUP ICERISINDE OLACAK SAYILARIN BIR COGU INVERTIBILITY’E UYMAZ. ORNEGIN Z10<em>’A BAKALIM. Z10</em> 1’DEN 9’A KADAR OLAN SAYILAR DEGILDIR. CUNKU GCD(5,10) 1’E ESIT OLMADIGINDAN INVERTIBILITY AXIOMUNA UYMAZ. BU NEDENLE COMPOSITE SAYILARIN GROUPLARI O SAYILARDAN KUCUK COPRIME SAYILARDAN OLUSUR. YANI Z10* = {1,3,7,9}. VE BU GROUPLARIN ORDERLARI TOTIENT FUNCTION’LA BULUNUR.</li>
+<li>Closure (when you apply the operation, you will get another element in the same set), associativity(operation can be applied in different orders), identity(there exist an element that when you apply the operation, the result no change) and invertibility should hold.</li>
+<li>A set together with one operation</li>
+<li>Set of numbers Zp* = {1,2,..,p-1}. p is prime.</li>
+<li>PRIMITIVE (ROOTS) ELEMENTS. A primitive element’s powers should produce all non zero elements of the congruence class. Another name is multiplicative generators.</li>
+<li>If p is a prime, there are phi_p-1 primitive elements of mod p. For example in mod7 we have 2 generators. phi_6 = 2.</li>
+<li>A group with composite modulus. n is the modulus. congruence classes coprime to n, for example 10 –&gt; 1,3,7,9 is a group. Check for axioms. Closure etc..</li>
+<li>SUBGROUP. Z11* = {1,..,10} where order of Z11<em>=10. H={1,3,4,5,9} –&gt; I propose this is a subgroup of Z11</em> group. To check if this is a subgroup, check if the axioms hold for the subgroup. ##### Finite Fields</li>
+<li>2 operations defined. Addition and multiplication.</li>
+<li></li>
+</ul>
+<h2 id="lecture-7">Lecture 7</h2>
+<ul>
+<li>Fi of 10 –&gt; 𐌘(10) –&gt; Number of integers that are smaller and relatively prime to 10. –&gt; 1,3,7,9 –&gt; So 𐌘(10) = 4</li>
+<li>If x=y(mod(𐌘(n))) then a^x = a^y(mod n)</li>
+<li>Example: 2^1301 mod 100? –&gt; 100 = 2^2 . 5^2 –&gt; Formula for 𐌘(n) = n . (1-1/n’s prime) . (1-1/n’s prime) - (…). –&gt; 𐌘(100) = 100 . (1-1/2) . (1-1/5) = 40 –&gt; So, we can reduce by 40. 1301 = 21 (mod 40) –&gt; So, the question is reduced to: 2^21 mod(100).</li>
+<li>Group: A set with one operation. And axioms should hold: 1) closure(take two elements from the set and apply the operation, result must be in the same group), 2) Associativity, 3)identity, 4) invertibility</li>
+<li>Example: Set of integers Z and operation is addition. All axioms hold. Identity = 0. Invertibility = choose any number, you have an inverse. Inverse means take a number with its inverse, apply the operation you have to get the identity which is 0 in our case. –&gt; take 2 and -2, result is 0. ### Primitive (Roots) Elements</li>
+<li>The elements which produce all the elements of the group when the powers of the element generate all other group members. 3 mod(7) –&gt; 3^1 = 3, 3^2 = 2, 3^3 = 6, 3^4=4, 3^5= 5, 3^6=1, hence, 3 is generator for this group.</li>
+<li>If p is a prime, there are 𐌘(p-1) primitive elements mod p. So, in mod 7, 𐌘(7-1) = sizeof(1,5) = 2, so apart from 3, mod 7 has another generator.</li>
+<li>SUBGROUP: We can form a subgroup from a group. For example Z11 = {1,…,10}. H={1,3,4,5,9} is subgroup which also holds all the axioms. Due to Lagrange theorem, the order of subgroup must divide the order of the group –&gt; 5 | 10. ### Finite Fields</li>
+<li>Two operations: addition and multiplication.</li>
+<li>Set of real numbers is infinite field: Take any element, it has both additive and multiplicative inverse in the same field.</li>
+<li>Binary extension fields. GF(2^3) = {0,1,x,x+1,x<sup>2,x</sup>2+1,x<sup>2+x,x</sup>2+x+1} –&gt; This can be reduced from irreducible polynomial x^3 + x + 1. Addition and subtraction are easy in this field and they are equal operations. In the multiplication, divide the result to the irreducible polynomial if the result exceeds GF set.</li>
+<li>Irreducible polynomial != always primitive polynomial. Primitive polynomial = It has a root (an element which makes this irreducible polynomial zero) and that root’s all powers give GF(2^n) where n is the maximum power of the irreducible polynomial</li>
+</ul>
+<figure>
+<img src="/home/kamadan/Desktop/4-1/CS411/notes/primitive-polynomials.png" alt="Primitive Polynomials" /><figcaption>Primitive Polynomials</figcaption>
+</figure>
+<ul>
+<li>Irreducible polynomial = Polynomial which is ‘prime’, which means cannot be divided without remainder.</li>
+<li>Primitive polynomial = It has a root whose powers make all the GF of its primitive polynomial. And the root is called primitive element.</li>
+</ul>
+<h3 id="stream-ciphers">Stream Ciphers</h3>
+<ul>
+<li>Stream ciphers are symmetric ciphers which means the same key is used to encrypt and decrypt.</li>
+<li>Stream ciphers solves the problem of generating full random keys as in the case of one time pad and allows to generate a small uniformly randomly key and by using it generate a pseudo-random-key by using a pseudo-random-number-generator. And the point is that, by starting with the same short secret key (the initial state), we can reproduce this pseudo-random-key in the both sender and receiver. If the key was truly random, the receiver would never (computationally infeasible) regenerate the key.</li>
+<li>Stream ciphers are modeled as finite-state machines, hence they are deterministic.</li>
+</ul>
+<figure>
+<img src="/home/kamadan/Desktop/4-1/CS411/notes/stream-ciphers.png" alt="Stream Ciphers" /><figcaption>Stream Ciphers</figcaption>
+</figure>
+<ul>
+<li>The state machine,next-state function and output function are present in both sender and receiver part, so that the receiver can regenerate the key (remember this is symmetric key and the state machine is deterministic).</li>
+<li>Linear Feedback Shift Registers (LFSR). The most important point of random bit sequence is that it does not repeat itself. However, we do not use truly random bit sequence here. So, what should we do to mimic truly random bit sequence? Increase the repeat period of the bit sequence in an amount that nobody realizes that it is actually pseudo-random. And if the connection polynomial is chosen carefully, the output of LFSR can have period of 2^L -1. #### Berlekamp Massey</li>
+<li>Works for linear relations, not for non linear relations.</li>
+</ul>
+<h4 id="non-linear-combination-generator">Non-linear Combination Generator</h4>
+<ul>
+<li>If you have a good combination generator, you can get pass berlekamp massey.</li>
+<li>Balanced generator. Number of 1s and 0s are same. Good statistical property.</li>
+<li>Combiner function must be balanced. Number of 1s and 0s are same. There should not be any correlation between input and the output.</li>
+<li>Higher the non linearity, better the algorithm against Berlekamp-Massey</li>
+<li>In all cryptography, try to avoid linearity. ##### The Geffe Generator</li>
+<li>F(x1,x2,x3) = x1x2 xor x2x3 xor x3</li>
+<li>You will have huge period. Huge linear complexity.</li>
+<li>If you take a look at the truth table, Geffe generator is also not secure. There is a correlation. The output function and the input are correlated. x1 is %70 same as the output bit. There is a correlation!!</li>
+<li>By this you can safely generate huge linear complexity and huge periods.</li>
+<li>We can attack by divide and conquer.</li>
+</ul>
+<h5 id="trivium">Trivium</h5>
+<ul>
+<li>Easy to implement. Nice, secure. AND gates make it feedback shift registers. Not LFSR. If you use AND gates they give you more security but more biase (Truth table of AND has 3 1s and only 1 0)</li>
+</ul>
+<h3 id="salsa-20">Salsa 20</h3>
+<ul>
+<li>Modern 256 bit stream cipher. Internal state is 512 bits.</li>
+<li>8 words of key + 2 words of block number + 2 words of nonce + 4 fixed words.</li>
+</ul>
+<h2 id="block-ciphers">Block Ciphers</h2>
+<ul>
+<li>A family of functions which maps n-bit plaintext blocks to n-bit ciphertext blocks. n=block-length.</li>
+<li>Substitution cipher with a large character size. In DES character size is 64 bits and in AES character size is 128 bits.</li>
+<li>Encryption and decryption keys are mostly functions of each other. Most of the time, in block ciphers encryption and the decryption keys are identical</li>
+<li>Modes of operations:</li>
+</ul>
+<ol type="1">
+<li>Electronic codebook. Plaintext is broken into n-bit blocks. (If the plaintext is smaller than the n, padding). If you use the same key, the same plaintext block will always generate the same ciphertext block. Hence, this is indeed a substitution cipher. Each block is encrypted and decrypted independent of each other. No effect on other blocks if there is an error in a block. Since the same plaintext gives the same ciphertext, it gives info, clue, hint about what you are sending (linux penguin picture example!). We dont use this mode of operation in practice.</li>
+<li><p>Cipher block chaining (CBC). In this method, we encrypt the plaintext block i by xoring it with the previous ciphertext block and then encrypt. C0 is the initial vector, not secret but selected as random. It is self synchronizing. <img src="/home/kamadan/Desktop/4-1/CS411/notes/block_cipher.png" alt="Block ciphers" /></p></li>
+<li>Cipher feedback mode (CFB). Again there is an initial vector to start with. and the internal state is not a secret thing, the secret thing is the key. Generate the same Oi without knowing the key is hard. Is it self synchronizing? It will recover after some time.</li>
+<li>Output feedback mode. Similar to CFB but the internal state is not shared. More secure. How to share the initial state? We just send it :). If at some time, sender and receiver have different internal state, they will never self synchronize.</li>
+<li><p>Counter (CTR) mode. Similar to CFB. Internal state has two components: Initial state and the counter. The encryption and decryption of a block is independent from other blocks. If you know the block number, you can just jump and decrypt that block without depending on previous blocks. What is different from electronic codebook? This is not substitution cipher, you are encrypting with different keys even the plaintext are exactly same. It depends on the counter.</p></li>
+</ol>
+<h4 id="how-to-evaluate-a-cryptographical-algorithm">How to evaluate a cryptographical algorithm?</h4>
+<ul>
+<li>Historical strength. A lot of people are using for a very long time. This increases confidence level.</li>
+<li>Key size. Must be long enough so that, brute force are not possible. Longer key = distribution is harder, decryption speed is reduced. Find the balance.</li>
+<li>Complexity. Mapping btw plaintext and the ciphertext must be complex enough. But again the balance is important. Takes much time to implement the complex algorithms.</li>
+<li>Evaluating block ciphers: block size- larger block size higher the security, performance is effected. Throughput: fast and easy to implement in hardware and software</li>
+</ul>
+<h4 id="des-algorithm">DES Algorithm</h4>
+<ul>
+<li>NIST released in 1976. First algorithmic standard. Everybody started using this, bankings too. Replaced in 2001 by AES. Differential attack.</li>
+<li>Block length: 64 bit.</li>
+<li>Key length: 56 bits.</li>
+<li>Feistel system: <img src="/home/kamadan/Desktop/4-1/CS411/notes/feistel.png" alt="Feistel system" /></li>
+<li>In every round we have a different round key generated. And we have 16 rounds in DES. Feistel system ensures that the decryption has an inverse. You can decrypt, guaranteed. More rounds? No need, optimal is this number.</li>
+<li>Irregular swap at the end.</li>
+<li>Slide 15, 2 round DES.</li>
+<li>DES have some flaws. Weak keys. If you double encyrption with that key, it gives the plaintext back. There are 4 keys like this. Key space is 2^56 and we have just 4 weak keys.</li>
+<li>There are also semi-weak keys. They are pairs.</li>
+<li>Attacks to DES: 1) Exhaustive search. Test all possible keys, key size is small we have only 56 bits. 2) Differential attack. This needs many ciphertext and plaintext pairs which is not practically reasonable.</li>
+<li>DES is not SECURE today.</li>
+</ul>
+<h4 id="des-alternatives">DES Alternatives</h4>
+<ul>
+<li>Key length of DES is short, so today it is not used for secure applications.</li>
+</ul>
+<ol type="1">
+<li>Double DES. Encrypt two times. Vulnerable to meet-in-the-middle attack: Ek1(P) = Dk2(C). So, try all keys and encrypt plaintext, 2^56 entries. Also, try all keys and decrypt ciphertext, 2^56 entries. Finally, there will be some entry that is equal to each other since Ek1(P) = Dk2(C). Hence, we find the k1 and k2. The difficulty is: 2^56 operations for encrypting with all possible keys, 2^56 operations for decrypting with all possible keys –&gt; 2. 2^56 –&gt; 2^57 –&gt; effective key length of double DES is 2^57.</li>
+<li>Triple DES. 2^112 + 2^56 is the effective key length.</li>
+</ol>
+<h4 id="aes-rijndael">AES (Rijndael)</h4>
+<ul>
+<li>Successor to DES.</li>
+<li>Block size is 128-bit but support for 192 and 256 bits of key sizes.</li>
+<li>We use this today to secure the internet.</li>
+<li>Performance: AES vs Triple DES –&gt; AES is better when you provide more resources.</li>
+<li>Takes 128 bit plaintext and have 128/192/256 bit key size and produces 128 bit ciphertext.</li>
+<li>Longer key length = number of rounds increased.</li>
+<li>Not a Feistel cipher. AES processes the whole block where the DES was processing only the half of the block. So, to reach the same security level AES only needs 10 rounds where DES needed 16 rounds. 3 layers/steps:</li>
+</ul>
+<ol type="1">
+<li>Key addition layer (xor the block with the round key)</li>
+<li>Byte substitution layer (Non-linear operation. 8-by-8 substitution (s-box) –&gt; Confusion). In this step we take each of the bytes and by a S-box function, we map it to another byte. We can use look-up table approach in this step to precompute the output of each possible byte when our s-box function is applied.</li>
+<li>Diffusion layer (Linear operations. Provides the diffusion of the bits of a block. ShiftRow, MixColumn layers –&gt; Diffusion –&gt; Change in 1 byte affects more than 1 byte in the output)</li>
+</ol>
+<ul>
+<li>We repeat this 9 times and the last round is same except we do not use MixColumn Layer.</li>
+<li>Shiftrow layer: Cyclically shift each row to the left with the amount corresponding the the row number. 0th row –&gt; Shift 0, 1st row–&gt; shift 1</li>
+<li>IMPORTANT!!! SOLVE EXAMPLES OF SHIFTROW LAYER AND MIXCOLUMN LAYER. PROF SAYS THAT HE CAN ASK SOMETHING SIMILAR IN THE EXAM</li>
+<li>We need round keys for 10 rounds. The nonlinear SBOX function is used to generate round keys. Highly nonlinear complex SBOX function. DES had weak keys which do not do encryption in a good way. In AES, the key scheduling method is complicated so that we do not have those weak keys.</li>
+<li>All these layers have to be invertible, since Rijndael is not Feistel cipher. Byte substitution can be inverted, just invert the lookup table. Shiftrow also can be inverted, just shift right instead of left. In Mixcolumn we used a matrix, that matrix’s inverse is the one that we are looking for to invert this step.</li>
+<li>DECRYPTION: Inversely apply the operations in the reverse order.</li>
+<li>We just touch every bit in the AES, as opposed to DES which used Feistel cipher and touched only the half at each round. By this reason, we reduce the number of rounds that we need. This has the effect of diffusing the input bits faster which makes AES better.</li>
+<li>SBOX functions used to generate round keys have backdoors, trapdoors? Noone since then ever find such a thing. Highly nonlinear and balanced. The function is not someone’s invention, it is very common function.</li>
+<li>BREAKING THE AES: No known attacks are better than brute force for seven or more rounds. Brute force is better for longer round numbers.</li>
+</ul>
+<h3 id="cryptographic-hash-functions">Cryptographic Hash Functions</h3>
+<ul>
+<li>Very important. Essence of blockchain technology. Message authentications, digital signatures and many more..</li>
+<li><strong><em>Non-invertible.</em></strong></li>
+<li>One-way functions, and no secret key.</li>
+<li>Produces a fixed-length output. Output is called hash.</li>
+<li>1 bit change in the input changes the output dramatically.</li>
+<li>Integrity is very important when sending messages. We want to sure that our message is not changed along the way. <img src="/home/kamadan/Desktop/4-1/CS411/notes/hash.png" alt="Basic use of Hash" /></li>
+<li>First the message is hashed and then encrypted. CAREFUL, we encrypt the hash of the message not the message itself. We need authentication only in this case. Finally, the message and the encrypted hash is concatenated and sent to the receiver. When the receiver takes the message, he takes the hash of the message and then decrypts the input hash that is sent by the sender and compare them if they are the same. If they are the same, then we know that the message is not changed along the way. <img src="/home/kamadan/Desktop/4-1/CS411/notes/hash2.png" alt="Both encrypted message and the authentication" /></li>
+<li>In this case the message is also encrypted. At the end we make sure that the message is not changed along the way as well as we know that our message is not read by any third party along the way. ##### Requirements for a Hash Function</li>
+<li>One-way property. a) Easy to compute for any given x which makes implementations easy. b) For any given hash value, it is computationally infeasible to find x such that H(x) = h.</li>
+<li>Since hash functions are not invertible, they are not 1-1. So, we have a collision chance. We have to have a weak collision resistance. For any given message x, it is computationally infeasible to find y!=x such that H(x) = H(y)</li>
+<li>Strong collision resistance. It is computationally infeasible to find any pair (x,y) such that H(x) = H(y).</li>
+<li>So finding collisions must be hard, it is a property of a good hash function.</li>
+<li>If the output of a hash function is m-length then for a given message x, finding another message y with the same hash value requires 2^m trials on average. (Weak collision)</li>
+<li>To find a pair whose hash values are same, we need 2^m/2 trials because birthday paradox. ##### Different standards, functions</li>
+<li>MD5 –&gt; Don’t use, not secure. Many collisions</li>
+<li>SHA-1. 160 bit. ideal case is to have 2^80 operations when brute forced with birthday paradox. However, crpytanalysts found some way that require 2^63 operations are enough.</li>
+<li>After weaknesses of SHA-1, SHA-2 is proposed, but lasted short time. And NIST had a hash function competition.</li>
+<li>SHA3 standard is the standard today. The output bit length can be changed, 256, 512 etc. ##### Birthday Paradox</li>
+<li>Helps us to calculate how hard to have a collision for a hash function.</li>
+<li>As you have more people in a room, the coincidince that 2 people will have the same birthday increases. What is the probability? It is the same thing as having two messages having the same hash. 23 people are enough that 2 people have the same birthday has probability of %50.</li>
+<li>For collision of hash function we cannot use the classic formula to compute the possiblity. Hence we use a formula that approaches to the reality when n is large. <img src="/home/kamadan/Desktop/4-1/CS411/notes/birthday.png" alt="Birthday Paradox approach" /></li>
+<li>When we have a m-bit output hash function, all possible hash values are 2^m. So, it is like the number of days 365 in the original birthday paradox. We try to find the collision probability of some number of messages. If we have 2^128 messages, the probability becomes nearly %40 when we calculate with our approach.</li>
+<li>Another approach: Two rooms with k people each. Choose one person from each room and the formula that gives the probability of a pair of people with the same birthday is different than our original approach. If we have two sets of messages with k=2^m/2, then we have %63 chance that we have a collision.</li>
+<li>When we have a message M, the attacker has to find M’ that H(M) = H(M’). If our hash length is 64 bit, after trying about 2^64 different messages we are highly likely to find a collision. However, birthday paradox is much more feasible to use.</li>
+<li>The sender generates a hash value for the message M that he is sending. The attacker can replace the original message with the message M’ which generates the same hash, COLLISION!. Then attacker can send the M’ to the receiver and make him sign the fake M’. If the hash value is 64-bit, the level of effort required is 2^32. ##### Merkle Tree</li>
+<li>We want to know that the files that we download from the cloud are authentic.</li>
+<li>Merkle trees are used to efficiently calculate the all messages autheticity. Blockchain uses this. <img src="/home/kamadan/Desktop/4-1/CS411/notes/merkle.png" alt="Merkle Tree" /></li>
+</ul>
+<h5 id="password-protection">Password Protection</h5>
+<ul>
+<li>Authentication server stores the hashes of your password. So, attacker can just brute forcely find a collision and break your password. Dictionary attack. Find all possible hashes for all possible passwords and store them in the dictionary.</li>
+<li>In order to prevent this, authentication servers use salting to make it harder to crack the password with brute force dictionary attacks. The authentication server adds a salt, maybe 16-bits and concatenates it to your password and then hashes all together and saves it as it is. Now, the dictionary attacker has to compute all hashes of possible passwords and also their possible salts. The dictionary size increases significantly. ##### Rainbow Table</li>
+<li>Time-memory trade-off.<br />
+</li>
+<li>Case 1 (Easiest but very low probability): Our p0 is equal to one of the last elements of our password chains. So, we have an hash value and we want to find the password. We have a reduction function which we give our hash value as an input. This reduction function gives us p0 which we will compare with the last elements of password chains. This p0 is produced by the reduction function –&gt; p0 = R(h). And we will compare p0 with the last elements. If p0=some last element, Then we know that R(h) = R(H(the element before the last element)). So, h= H(the element before the last element). So, our password becomes the element before the last element. Since we store the first and last elements of the password chains, we can regenerate that element by starting from the start.</li>
+<li>Case 2: Again we have the hash value, we put it into reduction function and get p0. However, when we compare p0 with the last elements of our chains, we dont get an equality in this case. So, we compare p1 = f(p0) with the last elements. If we have an equality with the p1, we go on with the same logic –&gt; R(H(p0)) = R(H(pj,t-2)) –&gt; H(p0)=H(pj,t-2) –&gt; p0 = pj,t-2. Then again regenerate pj,t-2’th element starting from the beginning</li>
+<li>The important thing here is that, in the chain we generate the next elements by applying reduction function to the current element’s hash value –&gt; In order to get pj,t-1 –&gt; R(H(pj,t-2))</li>
+</ul>
+<h5 id="message-authentication">Message Authentication</h5>
+<ul>
+<li>Receiver makes sure that the message is not changed by 3rd parties.</li>
+<li>So, cant we just decrypt and check if the result is meaningful or not? NO, the message that we want to send may not be meaningful.</li>
+<li>SEPARATION of authentication and confidentiality may offer architectural flexibility.</li>
+<li>MAC or cryptographic checksum is used for authentication to overcome these problems. We have a MAC function and a secret key shared between two parties wanting to communicate K’ab. A sends message M to B and calculates the MAC as function of the message and the key. MAC = C(K’ab)(M) –&gt; C is the MAC function taking shared key as the input and M, the message to be calculated MAC for. The message and MAC are transmitted to B</li>
+</ul>
+<p><img src="/home/kamadan/Desktop/4-1/CS411/notes/mac.png" alt="MAC" /> * In this case, we do not care about the confidentiality of the message (message is not encrypted), we only care about the authentication. <img src="/home/kamadan/Desktop/4-1/CS411/notes/mac2.png" alt="MAC" /> * In this case, we need both authentication and confidentiality so that we encrypt our message. Here, we calculate the MAC of the message first and then concatenate it with the message and then finally encrypt. The receiver side first decrypts the message and then calculates the MAC for message and compares with the MAC which have arrived.</p>
+<p><img src="/home/kamadan/Desktop/4-1/CS411/notes/mac3.png" alt="MAC" /> * In this case, sender first encrypts and then calculates the MAC of the encrypted message and then concatenates both. The receiver takes the ciphertext and the MAC. First, the MAC of the encrypted message is calculated and then compared with the MAC which have received. If they are the same then we do the decryption operation. This method has 2 advantages over the previous method shown in the previous image. 1) We get rid of the overhead of decrypting not authenticated messages. We just dont decrypt if the message is corrupted. 2) We can parallelyze the MAC calculation and the decryption, they are not dependent on each other, hence faster. * SIDE NOTE: When you talk about encryption it is reversible, if you encrypt you have to be able to decrypt. However, in the hash or MAC, it does not need to be that way. They are mostly not reversible. Encryption is 1-1 whereas MAC is not 1-1 but many-to-one. MAC and hash is for authentication and integrity not for secrets.</p>
+<h2 id="public-key-cryptography-pkc">Public Key Cryptography (PKC)</h2>
+<ul>
+<li>Distribution and management of secret keys. We need to securely distribute the secret keys</li>
+<li>Each pair of users has to have different key. Which results in too many keys in the system, which is not maintainable. The solution is PKC.</li>
+<li>Every use has a pair of keys: 1) Public key, known to everyone in the system with assurance (we need to make sure that this public key really owned by that person. I cant any public key to be owned by the president of the US. This is solved by certificates). 2) Private key, known only to its owner.</li>
+<li>A sends his public key to B. B encrypts the message with A’s public key and sends the ciphertext to B. B decrypts the ciphertext using his private key.</li>
+<li>Security of a cryptographic algorithm depends on the hardness of the problem. For example 80 bit block cipher has the same security level as the crytographic hash functions with 160 bit (2^80 operations, birthday attack).</li>
+<li>Only short messages are encrypted by PKC.</li>
+<li>Digital signatures is the most important application of PKC. Not possible without PKC</li>
+<li>Key exchange is also another very important application of PKC. ##### RSA</li>
+<li>Choose two large primes p and q (selected at truly random and large enough, 1024 bit at least)</li>
+<li>Compute n=p.q –&gt; n is the hardest composite number to factor.</li>
+<li>Compute fi(n) = (p-1)(q-1)</li>
+<li>Choose a random integer, 0&lt;e&lt;fi(n) with gcd(e,fi(n))=1.</li>
+<li>Compute the inverse d=e^-1 mod fi(n) –&gt; e.d=1 mod fi(n).</li>
+<li>Public key: (e,n)</li>
+<li>Private key: (d,p,q)</li>
+<li>Encryption done by using public key. y=x^e mod n where x&lt; n</li>
+<li>Decryption done by using private key. x=y^d mod n. <img src="/home/kamadan/Desktop/4-1/CS411/notes/rsa.png" alt="RSA" /></li>
+<li>RSA really works proof: y= x^e mod n is the encryption where x is our message and e is a random integer that we have chosen satisfying gcd(e,fi(n))=1. And we know that e.d=1 mod fi(n) –&gt; we have calculated d by the inverse of e in mod fi(n). So, if we can assure that x^fi(n)=1 mod n, we can claim that y^d = x, since x.x^k.fi(n) mod n = y^d. AND, we know that x^fi(n) = 1 mod n when gcd(x,n)=1. What are the chances that x is not coprime to n? It is only possible if x is either p or q or n –&gt; Which is a very very very low probability since n is a number that is so so hard to factor. Note that even if the gcd is not 1, this can be solved, and the proof is complex.</li>
+<li>Problem is to find two large primes. It is a hard problem. We can’t deterministically find large primes without factorization which is a hard problem. So, we have a probabilistic algorithm that helps us find large primes probabilistically. MILLER-RABIN algorithm for primality testing. If the test says that n is composite –&gt; %100 composite. If the test says that n is prime –&gt; prime with probability&gt;0.75. So, use this test as much as possible to lower the chances of getting a non-prime number. 4^-1 . 4^-1 x 4^-1 … Decreases the chance of having a non-prime which passes the test.</li>
+<li>Prime numbers are very much less than composite numbers. So, in this test until we find a large prime how many numbers will be rejected? Prime number theorem: number of primes less than x: x/lnx –&gt; x/lnx / x = 1/lnx –&gt; Hence, on average, ln(x) integers are tested before a prime is found.</li>
+<li>For example, n=2^1024, then the percentage of primes smaller than n is %0.14. So, the prob. that we find a prime by the test is very small. How can we increase our chance? Eliminate all even integers and integers ending with digit 5. –&gt; This results in the exact number of the trials: 0.4 x ln(x) –&gt; 512 bit prime, average trial number: 0.4 x ln(2^512) = 142. We will try around 142 integers to find a 512 bit prime number</li>
+<li>SECURITY of RSA: In the brute force attack, we try all possible keys d to obtain x=y^d mod n where 0&lt; d&lt; fi(n). AND if n is large enough, 2048 bit number, fi(n) is very close to n itself. So, it is computationally infeasible to brute force all possible values of d which can take from 0 to 2^2048 for 2048 bit keys. Another way is to calculate fi(n) which would significantly help us to calculate d=e^-1 mod fi(n). Computing fi(n) is hard as factoring n. So, it is not feasible too. Another thing is to factor the n which would immediately give the fi(n) and then you can easily compute d and break the cipher. This is the only practical way to break RSA. You need to find an efficient way to factor large numbers.</li>
+<li>RSA is NOT semantically secure. <img src="/home/kamadan/Desktop/4-1/CS411/notes/semantic.png" alt="RSA is not semantically secure" /></li>
+</ul>
+<figure>
+<img src="/home/kamadan/Desktop/4-1/CS411/notes/prob.png" alt="RSA is not semantically secure" /><figcaption>RSA is not semantically secure</figcaption>
+</figure>
+<figure>
+<img src="/home/kamadan/Desktop/4-1/CS411/notes/probdec.png" alt="RSA is not semantically secure" /><figcaption>RSA is not semantically secure</figcaption>
+</figure>
+<figure>
+<img src="/home/kamadan/Desktop/4-1/CS411/notes/gamal.png" alt="RSA is not semantically secure" /><figcaption>RSA is not semantically secure</figcaption>
+</figure>
+</body>
+</html>
