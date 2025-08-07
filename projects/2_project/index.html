@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Nureddin  Kamadan | ARM Baremetal</title>
+<title>Nureddin  Kamadan | TimeInspector</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -158,9 +158,26 @@
     <p class="post-description">Static Analysis Tool to Detect Timing Based Side Channel Attacks</p>
   </header>
 
+<article>
+<p><strong>Abstract:</strong></p>
+<p>We present a static analysis approach to detect
+malicious binaries that are capable of carrying out a timing attack. The proposed approach is based on a simple
+observation that the timing attacks typically operate by
+measuring the execution times of short sequences of instructions. Consequently, given a binary, we first construct
+the control flow graph of the binary and then determine
+the paths between the pairs of time readings, on which a
+suspiciously low number of instructions might be executed.
+In the presence of such a path, we mark the binary as
+potentially malicious and report all the suspicious paths
+identified. In the experiments, where a collection of benign
+and malicious binaries were used, the proposed approach
+correctly detected all the malicious binaries with an accuracy
+up to 99.5% and without any false negatives.
+</p>
+</article>
 
   <article>
-    <p>Artifact and paper</p>
+    <p>Paper and the artifact</p>
 
   </article>
 
